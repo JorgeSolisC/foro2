@@ -28,25 +28,22 @@ class PostListTest extends FeatureTestCase
 
     function test_the_posts_are_paginated(){
 
-        //Having...
+        // Having...
         $first = factory(Post::class)->create([
-            'title'=> 'Post mas antiguo',
-            'created_at'=> Carbon::now()->subDays(2),
+            'title' => 'Post más antiguo',
+            'created_at' => Carbon::now()->subDays(2)
         ]);
-
-        factory(Post::class)->times(15)->create([
-            'created_at'=> Carbon::now()->subDay(),
+        $posts = factory(Post::class)->times(15)->create([
+            'created_at' => Carbon::now()->subDay()
         ]);
-
         $last = factory(Post::class)->create([
-            'title'=>'Post mas reciente',
-            'created_at'=> Carbon::now(),
+            'title' => 'Post más reciente',
+            'created_at' => Carbon::now()
         ]);
-
         $this->visit('/')
             ->see($last->title)
             ->dontSee($first->title)
-            ->click(2)
+            ->click('2')
             ->see($first->title)
             ->dontSee($last->title);
     }
