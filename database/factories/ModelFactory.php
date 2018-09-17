@@ -17,7 +17,7 @@ use App\Comment;
 use App\Post;
 use App\User;
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -32,7 +32,7 @@ $factory->define(Post::class, function (Faker\Generator $faker){
     return[
         'title'=>$faker->sentence,
         'content'=>$faker->paragraph,
-        'pending'=>$faker->boolean(),
+        'pending'=>true,
         'user_id'=> function (){
             return factory(User::class)->create()->id;
         },
