@@ -14,6 +14,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Post;
+use App\User;
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
@@ -31,5 +32,8 @@ $factory->define(Post::class, function (Faker\Generator $faker){
         'title'=>$faker->sentence,
         'content'=>$faker->paragraph,
         'pending'=>$faker->boolean(),
+        'user_id'=> function (){
+            return factory(User::class)->create()->id;
+        },
     ];
 });
